@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cinema.webapp.repositories;
+package com.cinema.webapp.services;
 
 import com.cinema.webapp.entities.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
 /**
  *
  * @author ADMIN
  */
-
-public interface CustomerRepository extends JpaRepository<Customer, Integer>{
-
+public interface CustomerService {
+    List <Customer> findAll();
 }

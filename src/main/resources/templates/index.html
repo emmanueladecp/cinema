@@ -9,15 +9,14 @@ and open the template in the editor.
       <title>Sistem Order Tiket On Line</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link href = "/css/styles.css" rel = "stylesheet"/>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-      
+      <script th:src="@{/js/script.js}"></script>
+      <link href = "/css/styles.css" rel = "stylesheet"/>
       
    </head>
    <body>
         <div class="container-fluid">
-           
            
             <div class="topNavigation">
                 <div class=" col-sm-12 text-right">
@@ -31,9 +30,9 @@ and open the template in the editor.
                         <div class="form-group row">
                                 <label for="searchCustID" class="col-sm-2 col-form-label">Customer</label>
                                 <div class="input-group col-sm-10">
-                                  <input type="text" class="form-control" id="searchCustID" placeholder="Search...">
+                                  <input type="text" class="form-control" id="searchCustID" placeholder="Search..." required>
                                   <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="button">
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#customerModal" >
                                       <i class="fa fa-search"></i>
                                     </button>
                                   </div>
@@ -44,7 +43,7 @@ and open the template in the editor.
                         <div class="form-group row">
                                 <label for="searchCinemaID" class="col-sm-2 col-form-label">Film</label>
                                 <div class="input-group col-sm-10">
-                                  <input type="text" class="form-control" id="searchCinemaID" placeholder="Search...">
+                                  <input type="text" class="form-control" id="searchCinemaID" placeholder="Search..." required>
                                   <div class="input-group-append">
                                     <button class="btn btn-secondary" type="button">
                                       <i class="fa fa-search"></i>
@@ -61,7 +60,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custName" class="col-sm-2 col-form-label">Name</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custName" readonly>
+                        <input type="text" class="form-control" id="custName" readonly required>
                       </div>
                     </div>
                     </div>
@@ -69,7 +68,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="filmName" class="col-sm-2 col-form-label">Film Name</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="filmName" readonly>
+                        <input type="text" class="form-control" id="filmName" readonly required>
                       </div>
                     </div>
                     </div>
@@ -80,7 +79,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custPhone" class="col-sm-2 col-form-label">Phone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custPhone" readonly>
+                        <input type="text" class="form-control" id="custPhone" readonly required>
                       </div>
                     </div>
                     </div>
@@ -88,7 +87,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="filmTime" class="col-sm-2 col-form-label">Time</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="filmTime" readonly>
+                        <input type="text" class="form-control" id="filmTime" readonly required>
                       </div>
                     </div>
                     </div>
@@ -100,7 +99,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custEmail" class="col-sm-2 col-form-label">Email</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custEmail" readonly>
+                        <input type="text" class="form-control" id="custEmail" readonly required>
                       </div>
                     </div>
                     </div>
@@ -108,20 +107,56 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="qtyBuy" class="col-sm-2 col-form-label">Buy</label>
                       <div class="col-sm-10">
-                        <input type="number" class="form-control" id="qtyBuy">
+                        <input type="number" class="form-control" id="qtyBuy" value="1" min="1" max="100" required>
                       </div>
                     </div>
                     </div>
                 </div>
                 
                 <div class="bottomNavigation text-center col-sm-12">
-                    <button type="button" class="btn btn-danger btn-lg">RESET</button>
-                    <button type="button" class="btn btn-success btn-lg">ORDER</button>
-                </div>>
+                    <button type="reset" class="btn btn-danger btn-lg" >RESET</button>
+                    <button type="submit" class="btn btn-success btn-lg">ORDER</button>
+                </div>
                 
             </form>
-            
+      
        </div>
+       
+        <div class="modal fade" id="customerModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title">Customer's List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                   </div>
+                   <div class="modal-body">
+                       <table class="table table-hover">
+                           <thead class="bg-dark text-white">
+                                <tr>
+                                    <td>Customer Name</td>
+                                    <td>Customer Phone</td>
+                                    <td>Customer Email</td>
+                                </tr>
+                           </thead>
+                           <tbody>
+                               <tr th:each="customer : ${customers}">
+                                   <td th:text="${customer.name}"></td>
+                                   <td th:text="${customer.phone}"></td>
+                                   <td th:text="${customer.email}"></td>
+                               </tr>    
+                           </tbody>
+                               
+                       </table>   
+                   </div> 
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   </div>
+                </div>        
+            </div>    
+        </div>
+       
        
         <script>
             var d = new Date();
@@ -129,6 +164,9 @@ and open the template in the editor.
             var _resultDate = new Intl.DateTimeFormat('en-GB', options).format(d);
             document.getElementById("todayDate").innerHTML = _resultDate;
         </script>
+        
+        
+        
        
        <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
