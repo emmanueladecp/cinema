@@ -11,6 +11,7 @@ import com.cinema.webapp.services.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 /**
  *
@@ -19,13 +20,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-    @Autowired
-    CustomerRepository customerRepository;
+    //@Autowired
+    private CustomerRepository customerRepository;
     
+    @Autowired
+    public void setProductRepository(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     @Override
-    public List<Customer> findAll() {
-        List<Customer> customers = customerRepository.findAll();
-        return customers;
+    public Iterable<Customer> listAllCustomers() {
+        return customerRepository.findAll();
     }
     
 

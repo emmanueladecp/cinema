@@ -5,14 +5,12 @@
  */
 package com.cinema.webapp.services;
 
-import com.cinema.webapp.entities.Customer;
+import com.cinema.webapp.entities.Ticket;
 
 /**
  *
  * @author ADMIN
  */
-public interface CustomerService {
-    //List <Customer> findAll();
-    
-    Iterable<Customer> listAllCustomers();
+public interface TicketService {
+    Iterable<Ticket> listAllTickets();
 }

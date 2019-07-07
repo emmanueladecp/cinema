@@ -8,7 +8,9 @@ package com.cinema.webapp.controllers;
 import com.cinema.webapp.repositories.CustomerRepository;
 import com.cinema.webapp.repositories.TicketRepository;
 import com.cinema.webapp.services.CustomerService;
+import com.cinema.webapp.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,21 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author ADMIN
  */
+@Controller
 public class IndexController {
+    @Autowired
+    private CustomerService customerService;
     
-    /**
-    @Autowired CustomerRepository customerRepository;
-    @Autowired TicketRepository ticketRepository;
+    @Autowired
+    private TicketService ticketService;
     
-    */
-    //@Autowired CustomerService customerService;
     
     @RequestMapping("/")
-    public String home()
+    public String home(Model model)
     {
-       // model.addAttribute("customers", customerService.getAllCustomers());
-       // model.addAttribute("tickets", ticketRepository.findAll());
-        
+        model.addAttribute("customers", customerService.listAllCustomers());
+        model.addAttribute("tickets",ticketService.listAllTickets());
         return "index";
     }
     

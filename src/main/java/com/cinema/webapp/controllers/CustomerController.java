@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 
@@ -21,20 +22,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  * @author ADMIN
  */
 @RestController
-
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
     
     @GetMapping("/customers")
-    public List<Customer> getAll(){
-        List<Customer> customers = customerService.findAll();
+    public Iterable<Customer> listAllCustomers(){
+        Iterable<Customer> customers = customerService.listAllCustomers();
         
         return customers;
     }
     
-    @ModelAttribute("customers")
-    public List<Customer> customers() {
-        return customerService.findAll();
-    }        
+    //@GetMapping("/customers")    
+    //public String list(Model model){
+    //    model.addAttribute("customers", customerService.listAllCustomers());
+    //    return "customers";
+    //}
+
+            
 }
