@@ -29,7 +29,7 @@ public class IndexController {
     public String home(Model model)
     {
         model.addAttribute("customers", customerService.listAllCustomers());
-        model.addAttribute("tickets",ticketService.listAllTickets());
+        model.addAttribute("tickets",ticketService.fetchActiveTicket());
         return "index";
     }
     

@@ -5,10 +5,21 @@
  */
 package com.cinema.webapp.controllers;
 
-import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.services.TicketService;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +35,7 @@ public class TicketController {
     private TicketService ticketService;
     
     @GetMapping("/tickets")
-    public Iterable<Ticket> listAllCustomers(){
+    public Iterable<Ticket> listAllTickets(){
         Iterable<Ticket> tickets = ticketService.listAllTickets();
         
         return tickets;
@@ -35,4 +46,9 @@ public class TicketController {
 		return ticketService.getTicketById(id);
     }
     
+    @GetMapping(value = "/tickets/active")
+    public Iterable<Ticket> getTicketActive() {
+        return ticketService.fetchActiveTicket();
+    }
+
 }

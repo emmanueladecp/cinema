@@ -6,7 +6,9 @@
 package com.cinema.webapp.repositories;
 
 import com.cinema.webapp.entities.Ticket;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer>{
 
+    @Query("SELECT a FROM Ticket a where a.qty > 0 and a.date >= CURRENT_DATE() ")
+    List<Ticket> fetchActiveTicket();
 }
