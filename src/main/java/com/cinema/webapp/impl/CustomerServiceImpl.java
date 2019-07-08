@@ -9,9 +9,9 @@ import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.repositories.CustomerRepository;
 import com.cinema.webapp.services.CustomerService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 /**
  *
@@ -31,6 +31,11 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Iterable<Customer> listAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Customer> getCustomerById(int custId) {
+        return customerRepository.findById(custId);
     }
     
 

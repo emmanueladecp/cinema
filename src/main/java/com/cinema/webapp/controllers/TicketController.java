@@ -5,10 +5,13 @@
  */
 package com.cinema.webapp.controllers;
 
+import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.services.TicketService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,6 +28,11 @@ public class TicketController {
         Iterable<Ticket> tickets = ticketService.listAllTickets();
         
         return tickets;
+    }
+    
+    @GetMapping(value = "/tickets/{id}")
+    public Optional<Ticket> getTicketById(@PathVariable("id") int id) {
+		return ticketService.getTicketById(id);
     }
     
 }

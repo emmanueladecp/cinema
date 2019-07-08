@@ -5,9 +5,11 @@
  */
 package com.cinema.webapp.impl;
 
+import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.repositories.TicketRepository;
 import com.cinema.webapp.services.TicketService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Iterable<Ticket> listAllTickets() {
         return ticketRepository.findAll();
+    }
+    
+    @Override
+    public Optional<Ticket> getTicketById(int ticketId) {
+        return ticketRepository.findById(ticketId);
     }
     
 }

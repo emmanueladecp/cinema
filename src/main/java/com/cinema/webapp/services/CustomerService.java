@@ -6,6 +6,7 @@
 package com.cinema.webapp.services;
 
 import com.cinema.webapp.entities.Customer;
+import java.util.Optional;
 
 /**
  *
@@ -15,4 +16,7 @@ public interface CustomerService {
     //List <Customer> findAll();
     
     Iterable<Customer> listAllCustomers();
+
+    public Optional<Customer> getCustomerById(int custId);
+
 }

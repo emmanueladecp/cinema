@@ -5,16 +5,14 @@
  */
 package com.cinema.webapp.controllers;
 
-import com.cinema.webapp.repositories.CustomerRepository;
 import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.services.CustomerService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 /**
@@ -32,6 +30,13 @@ public class CustomerController {
         
         return customers;
     }
+   
+    @GetMapping(value = "/customers/{id}")
+    public Optional<Customer> getCustomerById(@PathVariable("id") int id) {
+		return customerService.getCustomerById(id);
+    }
+    
+    
     
     //@GetMapping("/customers")    
     //public String list(Model model){

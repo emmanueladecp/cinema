@@ -5,7 +5,9 @@
  */
 package com.cinema.webapp.services;
 
+import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.entities.Ticket;
+import java.util.Optional;
 
 /**
  *
@@ -13,4 +15,6 @@ import com.cinema.webapp.entities.Ticket;
  */
 public interface TicketService {
     Iterable<Ticket> listAllTickets();
+    
+    public Optional<Ticket> getTicketById(int ticketId);
 }

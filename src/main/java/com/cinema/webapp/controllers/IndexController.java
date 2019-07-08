@@ -5,8 +5,6 @@
  */
 package com.cinema.webapp.controllers;
 
-import com.cinema.webapp.repositories.CustomerRepository;
-import com.cinema.webapp.repositories.TicketRepository;
 import com.cinema.webapp.services.CustomerService;
 import com.cinema.webapp.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;

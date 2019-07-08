@@ -45,7 +45,7 @@ and open the template in the editor.
                                 <div class="input-group col-sm-10">
                                   <input type="text" class="form-control" id="searchCinemaID" placeholder="Search..." required>
                                   <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="button">
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#ticketModal">
                                       <i class="fa fa-search"></i>
                                     </button>
                                   </div>
@@ -122,33 +122,43 @@ and open the template in the editor.
       
        </div>
        
-        <div class="modal fade" id="customerModal" role="dialog">
-            <div class="modal-dialog">
+        <div class="modal fade" id="customerModal" role="dialog" tabindex="-1" aria-labelledby="modalCustomer" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                    <div class="modal-header">
-                       <h5 class="modal-title">Customer's List</h5>
+                       <h5 class="modal-title" id="modalCustomer">Customer's List</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                    </div>
                    <div class="modal-body">
+                       <div class="table-responsive-md">
                        <table class="table table-hover">
                            <thead class="bg-dark text-white">
                                 <tr>
+                                    <td>Customer ID</td>
                                     <td>Customer Name</td>
                                     <td>Customer Phone</td>
                                     <td>Customer Email</td>
+                                    <td>Select</td>
                                 </tr>
                            </thead>
                            <tbody>
                                <tr th:each="customer : ${customers}">
+                                   <td th:text="${customer.id}"></td>
                                    <td th:text="${customer.name}"></td>
                                    <td th:text="${customer.phone}"></td>
                                    <td th:text="${customer.email}"></td>
+                                   <td>
+                                    <form action="#" th:action="@{/customers/} + ${{customer.id}}" method="get">   
+                                    <button type="submit" class="btn btn-success" th:id="'table_selectedcustomer_' + ${customer.id}" 
+                                            th:value="${customer.id}">SELECT</button>
+                                    </form>    
+                                   </td>
                                </tr>    
                            </tbody>
-                               
-                       </table>   
+                       </table>
+                       </div>    
                    </div> 
                    <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -157,29 +167,47 @@ and open the template in the editor.
             </div>    
         </div>
        
-       <div th:switch="${customers}">
-            <h2 th:case="null">No users yet!</h2>
-                <div th:case="*">
-                    <h2>Users</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="customer : ${customers}">
-                            <td th:text="${customer.name}"></td>
-                            <td th:text="${customer.email}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>      
+       <div class="modal fade" id="ticketModal" role="dialog" tabindex="-1" aria-labelledby="modalTicket" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="modalTicket">Ticket's List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                   </div>
+                   <div class="modal-body">
+                       <div class="table-responsive-md">
+                       <table class="table table-hover">
+                           <thead class="bg-dark text-white">
+                                <tr>
+                                    <td>Ticket ID</td>
+                                    <td>Ticket Name</td>
+                                    <td>Ticket Date</td>
+                                    <td>Start Time</td>
+                                    <td>End Time</td>
+                                    <td>Remaining Qty</td>
+                                </tr>
+                           </thead>
+                           <tbody>
+                               <tr th:each="ticket : ${tickets}">
+                                   <td th:text="${ticket.id}"></td>
+                                   <td th:text="${ticket.name}"></td>
+                                   <td th:text="${ticket.date}"></td>
+                                   <td th:text="${ticket.starttime}"></td>
+                                   <td th:text="${ticket.endtime}"></td>
+                                   <td th:text="${ticket.qty}"></td>
+                               </tr>    
+                           </tbody>        
+                       </table>
+                       </div>    
+                   </div> 
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   </div>
+                </div>        
+            </div>    
         </div>
-       
        
         <script>
             var d = new Date();
