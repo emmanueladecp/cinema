@@ -5,9 +5,8 @@
  */
 package com.cinema.webapp.controllers;
 
-import com.cinema.webapp.entities.SalesOrder;
+import com.cinema.webapp.entities.Sales;
 import com.cinema.webapp.services.InvalidOrderException;
-import com.cinema.webapp.services.SalesOrderService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.cinema.webapp.services.SalesService;
 
 /**
  *
@@ -24,14 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/order")
-public class SalesOrderController {
+public class SalesController {
     
     @Autowired
-    private SalesOrderService salesOrderService;
+    private SalesService salesService;
     
     @PostMapping("/")
-    public void createOrder(@Valid @RequestBody SalesOrder salesOrder) throws InvalidOrderException{
-        salesOrderService.createOrder(salesOrder);
+    public void createOrder(@Valid @RequestBody Sales salesOrder) throws InvalidOrderException{
+        salesService.createOrder(salesOrder);
     }
     
 }

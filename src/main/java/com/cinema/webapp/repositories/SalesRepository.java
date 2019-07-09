@@ -5,7 +5,7 @@
  */
 package com.cinema.webapp.repositories;
 
-import com.cinema.webapp.entities.SalesOrder;
+import com.cinema.webapp.entities.Sales;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author ADMIN
  */
 @Repository
-public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer> {
+public interface SalesRepository extends JpaRepository<Sales, Integer> {
     
 }

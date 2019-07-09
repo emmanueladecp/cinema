@@ -5,31 +5,31 @@
  */
 package com.cinema.webapp.impl;
 
-import com.cinema.webapp.entities.SalesOrder;
+import com.cinema.webapp.entities.Sales;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.repositories.CustomerRepository;
-import com.cinema.webapp.repositories.SalesOrderRepository;
 import com.cinema.webapp.repositories.TicketRepository;
 import com.cinema.webapp.services.InvalidOrderException;
-import com.cinema.webapp.services.SalesOrderService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.cinema.webapp.repositories.SalesRepository;
+import com.cinema.webapp.services.SalesService;
 
 /**
  *
  * @author ADMIN
  */
 @Service
-public class SalesOrderServiceImpl implements SalesOrderService{
+public class SalesServiceImpl implements SalesService{
 
     //@Autowired
-    private SalesOrderRepository salesOrderRepository;
+    private SalesRepository salesOrderRepository;
     private TicketRepository ticketRepository;
     
     @Autowired
-    public void setOrderRepository(SalesOrderRepository salesOrderRepository) {
+    public void setOrderRepository(SalesRepository salesOrderRepository) {
         this.salesOrderRepository = salesOrderRepository;
     }
     
@@ -40,7 +40,7 @@ public class SalesOrderServiceImpl implements SalesOrderService{
 
     @Override
     @Transactional(rollbackFor = InvalidOrderException.class)
-    public void createOrder(SalesOrder salesOrder) throws InvalidOrderException {
+    public void createOrder(Sales salesOrder) throws InvalidOrderException {
         
         if (salesOrder.getQtyBuy() > salesOrder.getTicket().getQty()) {
               throw new InvalidOrderException(

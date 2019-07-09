@@ -28,7 +28,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Setter
 
-public class SalesOrder {
+public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;

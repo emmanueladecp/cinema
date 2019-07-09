@@ -5,13 +5,13 @@
  */
 package com.cinema.webapp.services;
 
-import com.cinema.webapp.entities.SalesOrder;
+import com.cinema.webapp.entities.Sales;
 
 /**
  *
  * @author ADMIN
  */
-public interface SalesOrderService {
+public interface SalesService {
     
-    public void createOrder(SalesOrder salesOrder) throws InvalidOrderException;
+    public void createOrder(Sales salesOrder) throws InvalidOrderException;
 }

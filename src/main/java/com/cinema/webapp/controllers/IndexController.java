@@ -6,6 +6,7 @@
 package com.cinema.webapp.controllers;
 
 import com.cinema.webapp.entities.Customer;
+import com.cinema.webapp.entities.Sales;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.services.CustomerService;
 import com.cinema.webapp.services.TicketService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import com.cinema.webapp.services.SalesService;
 
 /**
  *
@@ -44,12 +46,16 @@ public class IndexController {
     @Autowired
     private TicketService ticketService;
     
+    @Autowired
+    private Sales salesOrderService;
+    
     @RequestMapping("/")
     public String home(Model model)
     {
             
         model.addAttribute("customers", customerService.listAllCustomers());
         model.addAttribute("tickets",ticketService.fetchActiveTicket());
+        model.addAttribute("salesorder", new Sales());
         
         model.addAttribute("custName", custName) ;
         model.addAttribute("custId", custId) ;
