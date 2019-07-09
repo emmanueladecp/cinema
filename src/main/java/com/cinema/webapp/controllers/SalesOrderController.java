@@ -6,6 +6,7 @@
 package com.cinema.webapp.controllers;
 
 import com.cinema.webapp.entities.SalesOrder;
+import com.cinema.webapp.services.InvalidOrderException;
 import com.cinema.webapp.services.SalesOrderService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class SalesOrderController {
     private SalesOrderService salesOrderService;
     
     @PostMapping("/")
-    public SalesOrder createOrder(@Valid @RequestBody SalesOrder salesOrder){
-        return salesOrderService.createOrder(salesOrder);
+    public void createOrder(@Valid @RequestBody SalesOrder salesOrder) throws InvalidOrderException{
+        salesOrderService.createOrder(salesOrder);
     }
     
 }

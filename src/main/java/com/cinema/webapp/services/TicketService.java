@@ -17,4 +17,6 @@ public interface TicketService {
     Iterable<Ticket> listAllTickets();
     public Optional<Ticket> getTicketById(int ticketId);
     Iterable<Ticket> fetchActiveTicket();
+    public Ticket save(Ticket ticket);
+    //public Ticket updateStockTicket(int ticketId);
 }

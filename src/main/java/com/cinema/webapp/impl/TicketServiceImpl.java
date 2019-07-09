@@ -74,8 +74,7 @@ public class TicketServiceImpl implements TicketService {
         }
         
         return tickets;
-        
-        //return ticketRepository.fetchActiveTicket();
+       
     }
     
     private java.util.Date combineDateTime(java.util.Date date, java.util.Date time)
@@ -93,5 +92,12 @@ public class TicketServiceImpl implements TicketService {
                 java.util.Date result = calendarA.getTime();
                 return result;
         }
+
+    @Override
+    public Ticket save(Ticket newTicket) {
+        return ticketRepository.save(newTicket);
+    }
+
+    
     
 }
