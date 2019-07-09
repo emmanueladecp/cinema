@@ -43,7 +43,7 @@ public class TicketController {
     
     @GetMapping(value = "/tickets/{id}")
     public Optional<Ticket> getTicketById(@PathVariable("id") int id) {
-		return ticketService.getTicketById(id);
+    		return ticketService.getTicketById(id);
     }
     
     @GetMapping(value = "/tickets/active")

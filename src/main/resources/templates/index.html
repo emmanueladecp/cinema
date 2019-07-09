@@ -24,13 +24,13 @@ and open the template in the editor.
                 </div>
             </div>
                 
-            <form>
+            <form action="#" method="post">
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <div class="form-group row">
                                 <label for="searchCustID" class="col-sm-2 col-form-label">Customer</label>
                                 <div class="input-group col-sm-10">
-                                  <input type="text" class="form-control" id="searchCustID" placeholder="Search..." required>
+                                  <input type="text" class="form-control" id="searchCustID" placeholder="Search..." th:value="${custId}" required>
                                   <div class="input-group-append">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#customerModal" >
                                       <i class="fa fa-search"></i>
@@ -43,7 +43,7 @@ and open the template in the editor.
                         <div class="form-group row">
                                 <label for="searchCinemaID" class="col-sm-2 col-form-label">Film</label>
                                 <div class="input-group col-sm-10">
-                                  <input type="text" class="form-control" id="searchCinemaID" placeholder="Search..." required>
+                                  <input type="text" class="form-control" id="searchCinemaID" placeholder="Search..." th:value="${filmId}" required>
                                   <div class="input-group-append">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#ticketModal">
                                       <i class="fa fa-search"></i>
@@ -60,7 +60,8 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custName" class="col-sm-2 col-form-label">Name</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custName" readonly required>
+                        <input type="text" class="form-control" id="custName" th:value="${custName}" readonly required>
+                        <input type="hidden" th:value="${custId}" name="custId" />
                       </div>
                     </div>
                     </div>
@@ -68,7 +69,8 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="filmName" class="col-sm-2 col-form-label">Film Name</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="filmName" readonly required>
+                        <input type="text" class="form-control" id="filmName" th:value="${filmName}" readonly required>
+                        <input type="hidden" th:value="${filmId}" name="fimId" />
                       </div>
                     </div>
                     </div>
@@ -79,7 +81,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custPhone" class="col-sm-2 col-form-label">Phone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custPhone" readonly required>
+                        <input type="text" class="form-control" id="custPhone" th:value="${custPhone}" readonly required>
                       </div>
                     </div>
                     </div>
@@ -87,7 +89,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="filmTime" class="col-sm-2 col-form-label">Time</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="filmTime" readonly required>
+                        <input type="text" class="form-control" id="filmTime" th:value="${filmTime}" readonly required>
                       </div>
                     </div>
                     </div>
@@ -99,7 +101,7 @@ and open the template in the editor.
                     <div class="form-group row">
                       <label for="custEmail" class="col-sm-2 col-form-label">Email</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="custEmail" readonly required>
+                        <input type="text" class="form-control" id="custEmail" th:value="${custEmail}" readonly required>
                       </div>
                     </div>
                     </div>
@@ -150,10 +152,11 @@ and open the template in the editor.
                                    <td th:text="${customer.phone}"></td>
                                    <td th:text="${customer.email}"></td>
                                    <td>
-                                    <form action="#" th:action="@{/customers/} + ${{customer.id}}" method="get">   
-                                    <button type="submit" class="btn btn-success" th:id="'table_selectedcustomer_' + ${customer.id}" 
+                                   
+                                    <form action="#" th:action="@{/customers/get/} + ${{customer.id}}" method="get">
+                                        <button type="submit" class="btn btn-success" th:id="'table_selectedcustomer_' + ${customer.id}" 
                                             th:value="${customer.id}">SELECT</button>
-                                    </form>    
+                                      </form>
                                    </td>
                                </tr>    
                            </tbody>
@@ -187,6 +190,7 @@ and open the template in the editor.
                                     <td>Start Time</td>
                                     <td>End Time</td>
                                     <td>Remaining Qty</td>
+                                    <td>Select</td>
                                 </tr>
                            </thead>
                            <tbody>
@@ -197,6 +201,15 @@ and open the template in the editor.
                                    <td th:text="${ticket.starttime}"></td>
                                    <td th:text="${ticket.endtime}"></td>
                                    <td th:text="${ticket.qty}"></td>
+                                   
+                                   <td>
+                                   
+                                    <form action="#" th:action="@{/tickets/get/} + ${{ticket.id}}" method="get">
+                                        <button type="submit" class="btn btn-success" th:id="'table_selectedcustomer_' + ${ticket.id}" 
+                                            th:value="${ticket.id}">SELECT</button>
+                                      </form>
+                                   </td>
+                                   
                                </tr>    
                            </tbody>        
                        </table>
