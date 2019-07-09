@@ -6,14 +6,11 @@
 package com.cinema.webapp.services;
 
 import com.cinema.webapp.entities.SalesOrder;
-import com.cinema.webapp.entities.Ticket;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author ADMIN
  */
-@Transactional
 public interface SalesOrderService {
     
     public void createOrder(SalesOrder salesOrder) throws InvalidOrderException;
