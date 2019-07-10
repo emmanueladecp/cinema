@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.cinema.webapp.services.SalesService;
 import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -103,7 +104,9 @@ public class IndexController {
     }
     
     @PostMapping("/submitOrder")
-    public void createOrder(@Valid @RequestBody Sales salesOrder) throws InvalidOrderException{
-        salesService.createOrder(salesOrder);
+    public String createOrder(@Valid Sales sales, BindingResult result, Model model) throws InvalidOrderException {
+       
+       salesService.createOrder(sales);
+       return "redirect:/";
     }
 }
