@@ -29,7 +29,7 @@ public class SalesController {
     @Autowired
     private SalesService salesService;
     
-    @PostMapping("/")
+    @PostMapping("/createOrder")
     public void createOrder(@Valid @RequestBody Sales salesOrder) throws InvalidOrderException{
         salesService.createOrder(salesOrder);
     }

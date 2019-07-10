@@ -9,6 +9,7 @@ import com.cinema.webapp.entities.Customer;
 import com.cinema.webapp.entities.Sales;
 import com.cinema.webapp.entities.Ticket;
 import com.cinema.webapp.services.CustomerService;
+import com.cinema.webapp.services.InvalidOrderException;
 import com.cinema.webapp.services.TicketService;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.cinema.webapp.services.SalesService;
+import javax.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -47,7 +50,7 @@ public class IndexController {
     private TicketService ticketService;
     
     @Autowired
-    private Sales salesOrderService;
+    private SalesService salesService;
     
     @RequestMapping("/")
     public String home(Model model)
@@ -55,7 +58,7 @@ public class IndexController {
             
         model.addAttribute("customers", customerService.listAllCustomers());
         model.addAttribute("tickets",ticketService.fetchActiveTicket());
-        model.addAttribute("salesorder", new Sales());
+        model.addAttribute("sales", new Sales());
         
         model.addAttribute("custName", custName) ;
         model.addAttribute("custId", custId) ;
@@ -97,5 +100,10 @@ public class IndexController {
         filmTime = sdf.format(t.getStarttime());
         
         return "redirect:/";
+    }
+    
+    @PostMapping("/submitOrder")
+    public void createOrder(@Valid @RequestBody Sales salesOrder) throws InvalidOrderException{
+        salesService.createOrder(salesOrder);
     }
 }
